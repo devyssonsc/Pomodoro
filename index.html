@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro DSC</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="shortcut icon" href="img/Icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="container-header">
+        <div></div>
+        <div class="logo">
+            <img src="img/Icon.png" alt="Logo Tomate">
+            <h1>Pomodoro</h1>
+        </div>
+        <div class="option-buttons">
+            <button><i class="bi bi-gear-fill"></i></button>
+            <img src="img/set-times.png" alt="Set Times">
+            <button ><i class="bi bi-question-lg"></i></button>
+            <img src="img/definition.png" alt="What Is Pomodoro?">
+        </div>
+    </header>
+    <main class="container-main">
+        <div class="container">
+            <span class="mute-hover">Mute</span>
+            <span class="mute"><i class="bi bi-bell"></i></span>
+            <h2>Focus</h2>
+            <img src="img/img-focus.png" alt="Focus">
+            <img src="img/img-rest.png" alt="Rest">
+            <span id="time"></span>
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+            <div class="controls">
+                <span id="switch-mode"><i class="bi bi-arrow-left-right"></i></span>
+                <span class="switch-mode-hover">Switch</span>
+                <button id="play-pause"><i class="bi bi-play-fill"></i></button>
+                <span id="reset"><i class="bi bi-arrow-counterclockwise"></i></span>
+                <span class="reset-hover">Reset</span>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
