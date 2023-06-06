@@ -1,6 +1,74 @@
+@font-face {
+    font-family: "dreaming-outloud";
+    src: local("dreaming-outloud"), url("../font/dreaming-outloud-regular.otf");
+ }
+
+
+*{
+    font-family: 'dreaming-outloud', cursive;
+    color: white;
+    margin: 0;
+	padding: 0;
+	border: 0;
+}
 body{
     background-image: url(../img/fundo-desfocado.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: top left;
+}
+
+.none{
+    width: 33%;
+}
+
+.container-header{
+    box-sizing: border-box;
+    background-color: rgba(117, 16, 10, 0.6);
+    padding: 10px 50px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container-header .logo{
+    width: 33%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-header .logo h1{
+    font-size: 2em;
+}
+
+.container-header .logo img{
+    width: 45px;
+}
+
+.container-header .option-buttons{
+    text-align: right;
+    width: 33%;
+}
+
+.container-header .option-buttons img{
+    display: none;
+}
+
+.container-header .option-buttons button{
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    background-color: #BF1010;
+    font-size: 1.6em;
+    padding: 6px 6px 0 6px;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+.container-header .option-buttons button:hover{
+    font-size: 1.8em;
 }
