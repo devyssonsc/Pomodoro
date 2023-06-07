@@ -30,21 +30,34 @@
     </header>
     <main class="container-main">
         <div class="container">
-            <span class="mute-hover">Mute</span>
-            <span class="mute"><i class="bi bi-bell"></i></span>
+
+            <span id="mute-hover">Mute</span>
+            <span id="mute"><i class="bi bi-bell"></i></span>
+
             <h2>Focus</h2>
-            <img src="img/img-focus.png" alt="Focus">
-            <img src="img/img-rest.png" alt="Rest">
-            <span id="time"></span>
+            <img src="img/img-focus.png" alt="Focus" id="img-focus">
+            <img src="img/img-rest.png" alt="Rest" id="img-rest">
+            <span id="time">24m59s</span>
+
             <div class="progress-bar">
                 <div class="progress"></div>
+                <div class="progress-time">
+                    <p id="current-time">4:00</p>
+                    <p>5:00</p>
+                </div>
             </div>
+
+
             <div class="controls">
+
                 <span id="switch-mode"><i class="bi bi-arrow-left-right"></i></span>
-                <span class="switch-mode-hover">Switch</span>
-                <button id="play-pause"><i class="bi bi-play-fill"></i></button>
+                <span id="switch-mode-hover">Switch</span>
+
+                <div id="play-pause"><i class="bi bi-play-fill"></i></div>
+
                 <span id="reset"><i class="bi bi-arrow-counterclockwise"></i></span>
-                <span class="reset-hover">Reset</span>
+                <span id="reset-hover">Reset</span>
+
             </div>
         </div>
     </main>
