@@ -66,7 +66,6 @@ a{
 .container-header .option-buttons{
     text-align: right;
     width: 33%;
-    position: relative;
 }
 
 .container-header .option-buttons button{
@@ -81,6 +80,7 @@ a{
     vertical-align: middle;
     transition: all .1s linear;
     cursor: pointer;
+    position: relative;
 }
 
 .container-header .option-buttons button:hover{
@@ -94,11 +94,11 @@ a{
     position: absolute;
     width: 130px;
     top: 40px;
-    left: 70px;
+    left: -280%;
     transition: all .5s ease-in-out;
 }
 
-#set-times-button:hover + #set-times{
+#set-times-button:hover #set-times{
     opacity: 1;
     visibility: visible;
 }
@@ -109,11 +109,11 @@ a{
     position: absolute;
     width: 130px;
     top: 40px;
-    left: 125px;
+    left: -280%;
     transition: all .5s ease-in-out;
 }
 
-#definition-button:hover + #definition{
+#definition-button:hover #definition{
     opacity: 1;
     visibility: visible;
 }
@@ -133,15 +133,16 @@ a{
     position: relative;
 }
 
-.container #mute-hover, #switch-mode-hover, #reset-hover{
-    display: none;
-}
-
 .container #mute{
+    padding: 6px 6px 0 6px;
     position: absolute;
-    left: 15%;
-    top: 9%;
-    font: 1.4em;
+    top: 8%;
+    left: 13.5%;
+    font-size: 1.4em;
+    text-align: center;
+    vertical-align: middle;
+    transition: all .5s linear;
+    cursor: pointer;
 }
 
 .container h2{
@@ -199,17 +200,95 @@ a{
 }
 
 .container .controls #play-pause{
+    cursor: pointer;
     width: 50px;
     height: 50px;
     background-color: white;
     font-size: 2.5em;
     color: #FF5757;
-    padding: 4px 5px 5px 7px;
+    padding: 5px 5px 5px 7px;
     border-radius: 50%;
     box-sizing: border-box;
     text-align: center;
+    transition: all .2s linear;
+}
+
+.container .controls #play-pause:hover{
+    font-size: 2.7em;
+    padding: 3.5px 1px 2px 5px;
 }
 
 .container #switch-mode, #reset{
+    cursor: pointer;
     font-size: 1.4em;
+    padding: 5px 5px 0 5px;
+    transition: background-color .3s linear;
+}
+
+#switch-mode-hover{
+    position: absolute;
+    top: 94%;
+    left: 29%;
+    transform: translateX(-50%);
+    background-color: #BF1010;
+    padding: 2px 5px;
+    border-radius: 5px;
+    visibility: hidden;
+    opacity: 0;
+    transition: all .3s ease;
+    font-size: 0.9em;
+}
+
+#reset-hover{
+    position: absolute;
+    top: 94%;
+    left: 70.5%;
+    transform: translateX(-50%);
+    background-color: #bf1010cc;
+    padding: 2px 5px;
+    border-radius: 5px;
+    visibility: hidden;
+    opacity: 0;
+    transition: all .3s ease;
+    font-size: 0.9em;
+}
+
+#switch-mode-hover::before, #reset-hover::before{
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: -60%;
+    transform: translateX(-50%);
+    border: 10px solid;
+    border-color: #0000 #0000 #BF1010cc #0000;
+}
+
+#mute-hover{
+    position: absolute;
+    top: 3%;
+    left: 18.5%;
+    transform: translateX(-50%);
+    background-color: #bf1010cc;
+    padding: 2px 5px;
+    border-radius: 5px;
+    visibility: hidden;
+    opacity: 0;
+    transition: all .3s ease;
+    font-size: 0.9em;
+}
+
+#mute-hover::before{
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 80%;
+    transform: translateX(-50%);
+    border: 10px solid;
+    border-color: #BF1010cc #0000 #0000 #0000;
+
+}
+
+.div-switch:hover #switch-mode-hover, .div-reset:hover #reset-hover, .div-mute:hover #mute-hover{
+    visibility: visible;
+    opacity: 1;
 }

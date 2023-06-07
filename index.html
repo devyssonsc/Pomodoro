@@ -22,22 +22,30 @@
             </a>
         </div>
         <div class="option-buttons">
-            <button id="set-times-button"><i class="bi bi-gear-fill"></i></button>
-            <img src="img/set-times.png" alt="Set Times" id="set-times">
-            <button id="definition-button"><i class="bi bi-question-lg"></i></button>
-            <img src="img/definition.png" alt="What Is Pomodoro?" id="definition">
+            <button id="set-times-button">
+                <i class="bi bi-gear-fill"></i>
+                <img src="img/set-times.png" alt="Set Times" id="set-times">
+            </button>
+            
+            <button id="definition-button">
+                <i class="bi bi-question-lg"></i>
+                <img src="img/definition.png" alt="What Is Pomodoro?" id="definition">
+            </button>
+            
         </div>
     </header>
     <main class="container-main">
         <div class="container">
 
-            <span id="mute-hover">Mute</span>
-            <span id="mute"><i class="bi bi-bell"></i></span>
-
+            <div class="div-mute">
+                <span id="mute-hover">Mute</span>
+                <span id="mute"><i class="bi bi-bell"></i></span>
+            </div>
+            
             <h2>Focus</h2>
             <img src="img/img-focus.png" alt="Focus" id="img-focus">
             <img src="img/img-rest.png" alt="Rest" id="img-rest">
-            <span id="time">24m59s</span>
+            <span id="time">4m00s</span>
 
             <div class="progress-bar">
                 <div class="progress"></div>
@@ -50,14 +58,17 @@
 
             <div class="controls">
 
-                <span id="switch-mode"><i class="bi bi-arrow-left-right"></i></span>
-                <span id="switch-mode-hover">Switch</span>
+                <div class="div-switch">
+                    <span id="switch-mode"><i class="bi bi-arrow-left-right"></i></span>
+                    <span id="switch-mode-hover">Switch</span>
+                </div>
 
                 <div id="play-pause"><i class="bi bi-play-fill"></i></div>
 
-                <span id="reset"><i class="bi bi-arrow-counterclockwise"></i></span>
-                <span id="reset-hover">Reset</span>
-
+                <div class="div-reset">
+                    <span id="reset"><i class="bi bi-arrow-counterclockwise"></i></span>
+                    <span id="reset-hover">Reset</span>
+                </div>
             </div>
         </div>
     </main>
