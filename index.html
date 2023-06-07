@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,18 +11,21 @@
     <link rel="shortcut icon" href="img/Icon.png" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
     <header class="container-header">
         <div class="none"></div>
         <div class="logo">
-            <img src="img/Icon.png" alt="Logo Tomate">
-            <h1>Pomodoro</h1>
+            <a href="index.html">
+                <img src="img/Icon.png" alt="Logo Tomate">
+                <h1>Pomodoro</h1>
+            </a>
         </div>
         <div class="option-buttons">
-            <button><i class="bi bi-gear-fill"></i></button>
-            <img src="img/set-times.png" alt="Set Times">
-            <button ><i class="bi bi-question-lg"></i></button>
-            <img src="img/definition.png" alt="What Is Pomodoro?">
+            <button id="set-times-button"><i class="bi bi-gear-fill"></i></button>
+            <img src="img/set-times.png" alt="Set Times" id="set-times">
+            <button id="definition-button"><i class="bi bi-question-lg"></i></button>
+            <img src="img/definition.png" alt="What Is Pomodoro?" id="definition">
         </div>
     </header>
     <main class="container-main">
@@ -45,4 +49,5 @@
         </div>
     </main>
 </body>
+
 </html>

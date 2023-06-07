@@ -10,7 +10,19 @@
     margin: 0;
 	padding: 0;
 	border: 0;
+    box-sizing: border-box;
 }
+
+a{
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 body{
     background-image: url(../img/fundo-desfocado.jpg);
     background-repeat: no-repeat;
@@ -23,7 +35,6 @@ body{
 }
 
 .container-header{
-    box-sizing: border-box;
     background-color: rgba(117, 16, 10, 0.6);
     padding: 10px 50px;
     width: 100%;
@@ -52,23 +63,53 @@ body{
 .container-header .option-buttons{
     text-align: right;
     width: 33%;
-}
-
-.container-header .option-buttons img{
-    display: none;
+    position: relative;
 }
 
 .container-header .option-buttons button{
     width: 40px;
     height: 40px;
-    text-align: center;
     background-color: #BF1010;
-    font-size: 1.6em;
-    padding: 6px 6px 0 6px;
+    font-size: 1.4em;
+    padding-top: 5px;
     border-radius: 5px;
     margin-left: 10px;
+    vertical-align: middle;
+    transition: all .1s linear;
+    cursor: pointer;
 }
 
 .container-header .option-buttons button:hover{
-    font-size: 1.8em;
+    font-size: 1.5em;
+    background-color: #a50f0f;
+}
+
+#set-times{
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    width: 130px;
+    top: 40px;
+    left: 70px;
+    transition: all .5s ease-in-out;
+}
+
+#set-times-button:hover + #set-times{
+    opacity: 1;
+    visibility: visible;
+}
+
+#definition{
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    width: 130px;
+    top: 40px;
+    left: 125px;
+    transition: all .5s ease-in-out;
+}
+
+#definition-button:hover + #definition{
+    opacity: 1;
+    visibility: visible;
 }
