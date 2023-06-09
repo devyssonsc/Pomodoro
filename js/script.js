@@ -4,20 +4,21 @@ const imgFocus = document.querySelector("#img-focus");
 const imgRest = document.querySelector("#img-rest");
 const remainingMinutes = document.querySelector("#minutes");
 const remainingSeconds = document.querySelector("#seconds")
-const progressTime = document.querySelector("#progress-time");
-const progress = document.querySelector("#progress");
+const progress = document.querySelector(".progress");
+const progressTime = document.querySelector(".progress-time");
 const btSwitchMode = document.querySelector("#switch-mode");
 const btPlayPause = document.querySelector("#play-pause");
 const btReset = document.querySelector("#reset");
 
-
+let minTotal = 25;
 const isFocusMode = modeTitle.innerText.toLowerCase() == "focus" ? true : false;
 
 let minutes = Number(remainingMinutes.innerText.slice(0, -1));
 let seconds = Number(remainingSeconds.innerText.slice(0, -1));
 
 btPlayPause.addEventListener("click", () => {
-    setInterval(countTime, 200);
+    setInterval(countTime, 300);
+    setInterval(countProgressTime, 300);
 
     const iconPause = btPlayPause.children[0]
     iconPause.className = "bi bi-pause-fill";
@@ -41,10 +42,17 @@ function countTime() {
     } else{
         remainingSeconds.innerText = seconds + "s";
     }
+    remainingMinutes.innerText = minutes + "m";
+}
 
-    if(minutes < 10){
-        remainingMinutes.innerText = "0" + minutes + "m";
+function countProgressTime() {
+    let min = seconds == 0 ? (minTotal - minutes) + 1 : minTotal - minutes;
+    let sec = seconds > 0 ? 60 - seconds : seconds;
+
+    if(sec < 10){
+        progressTime.children[0].innerText = min-1 + ":0" + sec;
     } else{
-        remainingMinutes.innerText = minutes + "m";
+        progressTime.children[0].innerText = min-1 + ":" + sec;
     }
 }
+
