@@ -42,16 +42,18 @@
                 <span id="mute"><i class="bi bi-bell"></i></span>
             </div>
             
-            <h2>Focus</h2>
+            <h2 id="mode-title">Focus</h2>
             <img src="img/img-focus.png" alt="Focus" id="img-focus">
-            <img src="img/img-rest.png" alt="Rest" id="img-rest">
-            <span id="time">4m00s</span>
+            <img src="img/img-rest.png" alt="Rest" id="img-rest" class="img-oculta">
+            <span id="remaining-time">
+                <p id="minutes">25m</p><p id="seconds">00s</p>
+            </span>
 
             <div class="progress-bar">
                 <div class="progress"></div>
                 <div class="progress-time">
-                    <p id="current-time">4:00</p>
-                    <p>5:00</p>
+                    <p>00:00</p>
+                    <p>25:00</p>
                 </div>
             </div>
 
@@ -72,6 +74,7 @@
             </div>
         </div>
     </main>
+    <script src="js/script.js"></script>
 </body>
 
 </html>
