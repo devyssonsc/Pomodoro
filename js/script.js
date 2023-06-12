@@ -76,7 +76,7 @@ function countTime() {
     } else{
         remainingSeconds.innerText = seconds + "s";
     }
-    remainingMinutes.innerText = minutes + "m";
+        remainingMinutes.innerText = minutes + "m";
 
     countProgressTime(minutes, seconds);
 }
