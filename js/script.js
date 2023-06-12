@@ -9,8 +9,11 @@ const progressTime = document.querySelector(".progress-time");
 const btSwitchMode = document.querySelector("#switch-mode");
 const btPlayPause = document.querySelector("#play-pause");
 const btReset = document.querySelector("#reset");
+const alarm = document.querySelector("audio");
 
 let startClock;
+
+let alarmMuted = false;
 
 let isFocusMode = modeTitle.innerText.toLowerCase() == "focus" ? true : false;
 let minTotal = 25;
@@ -20,7 +23,7 @@ let progressWidth = 0;
 const iconPause = btPlayPause.children[0];
 
 btPlayPause.addEventListener("click", () => {
-    startClock = setInterval(countTime, 100);
+    startClock = setInterval(countTime, 50);
 
     iconPause.className = "bi bi-pause-fill";
     iconPause.style.left = "7%";
@@ -36,12 +39,28 @@ btSwitchMode.addEventListener("click", () => {
     switchMode();
 })
 
+btMute.addEventListener("click", () => {
+    if(!alarmMuted){
+        btMute.children[0].className = "bi bi-bell-slash";
+        btMute.previousElementSibling.innerText = "Unmute";
+        alarmMuted = true;
+    } else{
+        btMute.children[0].className = "bi bi-bell";
+        btMute.previousElementSibling.innerText = "Mute";
+        alarmMuted = false;
+    }
+})
+
 function countTime() {
     let minutes = Number(remainingMinutes.innerText.slice(0, -1));
     let seconds = Number(remainingSeconds.innerText.slice(0, -1));
     
     if(minutes <= 0 && seconds <= 0){
-        clearInterval(startClock);
+        if(!alarmMuted){
+            alarm.currentTime = 2;
+            alarm.play();
+        }
+        switchMode();
         return;
     }
 
@@ -119,3 +138,4 @@ function switchMode() {
     btPlayPause.addEventListener("mouseover", () => {btPlayPause.children[0].style.left = "10%"});
     btPlayPause.addEventListener("mouseout", () => {btPlayPause.children[0].style.left = "15%"});
 }
+
