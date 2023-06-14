@@ -49,6 +49,23 @@ btSwitchMode.addEventListener("click", () => {
     switchMode();
 })
 
+btReset.addEventListener("click", () => {
+    clearInterval(startClock);
+    btMute.children[0].className = "bi bi-bell";
+    btMute.previousElementSibling.innerText = "Mute";
+    alarmMuted = false;
+    modeTitle.innerText = "Foco";
+    remainingMinutes.innerText = "25m";
+    remainingSeconds.innerText = "00s";
+    isFocusMode = true;
+    progressTime.children[0].innerText = "0:00";
+    progressTime.children[1].innerText = "25:00";
+    imgFocus.classList.remove("img-oculta");
+    imgRest.classList.add("img-oculta");
+    minTotal = 25;
+    progressWidth = 0;
+    progress.style.width = "0%";
+})
 
 btMute.addEventListener("click", () => {
     if(!alarmMuted){
