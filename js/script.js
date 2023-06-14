@@ -180,6 +180,7 @@ function progressBar() {
 
 function switchMode() {
     clearInterval(startClock);
+    progressWidth = 0;
     progress.style.width = "0%";
 
     if(isFocusMode){
