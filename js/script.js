@@ -10,6 +10,9 @@ const btSwitchMode = document.querySelector("#switch-mode");
 const btPlayPause = document.querySelector("#play-pause");
 const btReset = document.querySelector("#reset");
 const alarm = document.querySelector("audio");
+const btDefinition = document.querySelector("#definition-button");
+const btCloseDefinition = document.querySelector("#close-definition");
+const modalDefinition = document.querySelector("#modal-definition");
 
 let startClock;
 
@@ -28,7 +31,7 @@ btPlayPause.addEventListener("click", () => {
     iconPause.className = "bi bi-pause-fill";
     iconPause.style.left = "7%";
     btPlayPause.addEventListener("mouseover", () => {btPlayPause.children[0].style.left = "7%"});
-    btPlayPause.addEventListener("mouseout", () => {btPlayPause.children[0].style.left = "12%"});
+    btPlayPause.addEventListener("mouseout", () => {btPlayPause.children[0].style.left = "11%"});
 
     if(minutes <= 0 && seconds <= 0){
         clearInterval(startClock);
@@ -50,6 +53,16 @@ btMute.addEventListener("click", () => {
         alarmMuted = false;
     }
 })
+
+btDefinition.addEventListener("click", () => {
+    modalDefinition.showModal();
+});
+
+btCloseDefinition.addEventListener("click", () => {
+    modalDefinition.close();
+})
+
+
 
 function countTime() {
     let minutes = Number(remainingMinutes.innerText.slice(0, -1));
@@ -135,6 +148,7 @@ function switchMode() {
     }
 
     iconPause.className = "bi bi-play-fill";
+    iconPause.style.left = "15%";
     btPlayPause.addEventListener("mouseover", () => {btPlayPause.children[0].style.left = "10%"});
     btPlayPause.addEventListener("mouseout", () => {btPlayPause.children[0].style.left = "15%"});
 }
