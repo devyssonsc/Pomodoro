@@ -11,30 +11,37 @@ const btPlayPause = document.querySelector("#play-pause");
 const btReset = document.querySelector("#reset");
 const alarm = document.querySelector("audio");
 const btDefinition = document.querySelector("#definition-button");
-const btCloseDefinition = document.querySelector("#close-definition");
 const modalDefinition = document.querySelector("#modal-definition");
+const modalRestover = document.querySelector("#modal-restover");
+const modalFocusover = document.querySelector("#modal-focusover");
+const btCloseDefinition = document.querySelector("#close-definition");
+const btCloseFocusover = document.querySelector("#close-focusover");
+const btCloseRestover = document.querySelector("#close-restover");
 
 let startClock;
 
 let alarmMuted = false;
 
-let isFocusMode = modeTitle.innerText.toLowerCase() == "focus" ? true : false;
+let isFocusMode = modeTitle.innerText.toLowerCase() == "foco" ? true : false;
 let minTotal = 25;
 
 let progressWidth = 0;
 
-const iconPause = btPlayPause.children[0];
+const iconPlayPause = btPlayPause.children[0];
 
 btPlayPause.addEventListener("click", () => {
-    startClock = setInterval(countTime, 50);
-
-    iconPause.className = "bi bi-pause-fill";
-    iconPause.style.left = "7%";
-    btPlayPause.addEventListener("mouseover", () => {btPlayPause.children[0].style.left = "7%"});
-    btPlayPause.addEventListener("mouseout", () => {btPlayPause.children[0].style.left = "11%"});
-
-    if(minutes <= 0 && seconds <= 0){
-        clearInterval(startClock);
+    if(iconPlayPause.className.includes("play")){
+        startClock = setInterval(countTime, 50);
+        iconPlayPause.className = "bi bi-pause-fill";
+        iconPlayPause.style.left = "7%";
+        btPlayPause.addEventListener("mouseover", () => {btPlayPause.children[0].style.left = "7%"});
+        btPlayPause.addEventListener("mouseout", () => {btPlayPause.children[0].style.left = "10%"});
+    } else if(iconPlayPause.className.includes("pause")){
+        clearInterval(startClock)
+        iconPlayPause.className = "bi bi-play-fill";
+        iconPlayPause.style.left = "15%";
+        btPlayPause.addEventListener("mouseover", () => {btPlayPause.children[0].style.left = "10%"});
+        btPlayPause.addEventListener("mouseout", () => {btPlayPause.children[0].style.left = "15%"});
     }
 })
 
@@ -42,25 +49,52 @@ btSwitchMode.addEventListener("click", () => {
     switchMode();
 })
 
+
 btMute.addEventListener("click", () => {
     if(!alarmMuted){
         btMute.children[0].className = "bi bi-bell-slash";
-        btMute.previousElementSibling.innerText = "Unmute";
+        btMute.previousElementSibling.innerText = "Desmutar";
         alarmMuted = true;
     } else{
         btMute.children[0].className = "bi bi-bell";
-        btMute.previousElementSibling.innerText = "Mute";
+        btMute.previousElementSibling.innerText = "Mutar";
         alarmMuted = false;
     }
 })
 
 btDefinition.addEventListener("click", () => {
     modalDefinition.showModal();
+    modalDefinition.style.opacity = "1";
 });
 
 btCloseDefinition.addEventListener("click", () => {
-    modalDefinition.close();
+    modalDefinition.style.opacity = "0";
+    setTimeout(() => {
+        modalDefinition.close();
+    }, 90);
 })
+
+btCloseFocusover.addEventListener("click", () => {
+    modalFocusover.style.opacity = "0";
+    setTimeout(() => {
+        modalFocusover.close();
+    }, 90);
+})
+
+btCloseRestover.addEventListener("click", () => {
+    modalRestover.style.opacity = "0";
+    setTimeout(() => {
+        modalRestover.close();
+    }, 90);
+})
+
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape" || event.keyCode === 27) {
+        modalDefinition.style.opacity = "0";
+        modalRestover.style.opacity = "0";
+        modalFocusover.style.opacity = "0";
+    }
+  });
 
 
 
@@ -69,6 +103,14 @@ function countTime() {
     let seconds = Number(remainingSeconds.innerText.slice(0, -1));
     
     if(minutes <= 0 && seconds <= 0){
+        if(isFocusMode){
+            modalFocusover.showModal();
+            modalFocusover.style.opacity = "1";
+        } else{
+            modalRestover.showModal();
+            modalRestover.style.opacity = "1";
+        }
+
         if(!alarmMuted){
             alarm.currentTime = 2;
             alarm.play();
@@ -92,6 +134,7 @@ function countTime() {
         remainingMinutes.innerText = minutes + "m";
 
     countProgressTime(minutes, seconds);
+    progressBar();
 }
 
 function countProgressTime(minutes, seconds) {
@@ -104,7 +147,6 @@ function countProgressTime(minutes, seconds) {
         progressTime.children[0].innerText = min-1 + ":" + sec;
     }
 
-    progressBar();
 }
 
 function progressBar() {
@@ -114,6 +156,8 @@ function progressBar() {
 
     if(progressWidth <= 100){
         progress.style.width = progressWidth + "%";
+    } else{
+        progressWidth -= 100;
     }
 }
 
@@ -122,7 +166,7 @@ function switchMode() {
     progress.style.width = "0%";
 
     if(isFocusMode){
-        modeTitle.innerText = "Rest";
+        modeTitle.innerText = "Descanso";
         remainingMinutes.innerText = "5m";
         remainingSeconds.innerText = "00s";
         isFocusMode = false;
@@ -134,7 +178,7 @@ function switchMode() {
 
         minTotal = 5;
     } else{
-        modeTitle.innerText = "Focus";
+        modeTitle.innerText = "Foco";
         remainingMinutes.innerText = "25m";
         remainingSeconds.innerText = "00s";
         isFocusMode = true;
@@ -147,9 +191,8 @@ function switchMode() {
         minTotal = 25;
     }
 
-    iconPause.className = "bi bi-play-fill";
-    iconPause.style.left = "15%";
+    iconPlayPause.className = "bi bi-play-fill";
+    iconPlayPause.style.left = "15%";
     btPlayPause.addEventListener("mouseover", () => {btPlayPause.children[0].style.left = "10%"});
     btPlayPause.addEventListener("mouseout", () => {btPlayPause.children[0].style.left = "15%"});
 }
-
