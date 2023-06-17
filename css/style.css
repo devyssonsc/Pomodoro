@@ -10,6 +10,7 @@
 	padding: 0;
 	border: 0;
     box-sizing: border-box;
+    user-select: none;
 }
 
 *:focus{
@@ -21,6 +22,7 @@ body, html{
     width: 100%;
     height: 100%;
     background-image: url(../img/fundo-desfocado.jpg);
+    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     overflow: hidden;
@@ -329,7 +331,7 @@ dialog{
     transition: opacity .2s ease;
 }
 
-dialog h1{
+dialog h2{
     margin-bottom: 20px;
     font-weight: 400;
     text-align: center;
@@ -352,7 +354,39 @@ dialog button{
     cursor: pointer;
 }
 
-dialog button:hover{
+#modal-definition button:hover, #modal-set-times button:hover, #modal-restover button:hover, #modal-focusover button:hover{
     background-color:#a50f0f;
     text-align: left;
+}
+
+#modal-set-times{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    transition: opacity .2s ease;
+}
+
+#modal-set-times .form-group{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+#modal-set-times .form-group button{
+    padding: 5px 15px;
+    font-size: 1.4em;
+    text-align: center;
+}
+
+#modal-set-times .form-group input[type="number"]{
+    padding: 5px 10px 5px 20px;
+    color: white;
+    background-color:#e63b3b;
+    font-size: 1.4em;
+    border-radius: 5px;
+    text-align: center;
 }

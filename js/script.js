@@ -10,20 +10,42 @@ const btSwitchMode = document.querySelector("#switch-mode");
 const btPlayPause = document.querySelector("#play-pause");
 const btReset = document.querySelector("#reset");
 const alarm = document.querySelector("audio");
+
 const btDefinition = document.querySelector("#definition-button");
+const btSetTimes = document.querySelector("#set-times-button")
 const modalDefinition = document.querySelector("#modal-definition");
 const modalRestover = document.querySelector("#modal-restover");
 const modalFocusover = document.querySelector("#modal-focusover");
+const modalSetTimes = document.querySelector("#modal-set-times");
 const btCloseDefinition = document.querySelector("#close-definition");
 const btCloseFocusover = document.querySelector("#close-focusover");
 const btCloseRestover = document.querySelector("#close-restover");
+const btCloseSetTimes = document.querySelector("#close-set-times");
+
+const btDecreaseFocus = document.querySelector("#btDecreaseFocus");
+const btDecreaseRest = document.querySelector("#btDecreaseRest");
+const btAddFocus = document.querySelector("#btAddFocus");
+const btAddRest = document.querySelector("#btAddRest");
+const setMinFocus = document.querySelector("#setMinFocus");
+const setMinRest = document.querySelector("#setMinRest");
+
+const frm = document.querySelector("form");
+
+
 
 let startClock;
 
 let alarmMuted = false;
 
 let isFocusMode = modeTitle.innerText.toLowerCase() == "foco" ? true : false;
-let minTotal = 25;
+
+let minFocus = 25;
+let minRest = 5;
+
+let minTotal = minFocus;
+
+setMinFocus.value = minFocus;
+setMinRest.value = minRest;
 
 let progressWidth = 0;
 
@@ -55,16 +77,22 @@ btReset.addEventListener("click", () => {
     btMute.previousElementSibling.innerText = "Mute";
     alarmMuted = false;
     modeTitle.innerText = "Foco";
-    remainingMinutes.innerText = "25m";
+    remainingMinutes.innerText = minFocus + "m";
     remainingSeconds.innerText = "00s";
     isFocusMode = true;
     progressTime.children[0].innerText = "0:00";
     progressTime.children[1].innerText = "25:00";
     imgFocus.classList.remove("img-oculta");
     imgRest.classList.add("img-oculta");
-    minTotal = 25;
+    minFocus = 25;
+    minRest = 5;
+    minTotal = minFocus;
     progressWidth = 0;
     progress.style.width = "0%";
+    iconPlayPause.className = "bi bi-play-fill";
+    iconPlayPause.style.left = "15%";
+    btPlayPause.addEventListener("mouseover", () => {btPlayPause.children[0].style.left = "10%"});
+    btPlayPause.addEventListener("mouseout", () => {btPlayPause.children[0].style.left = "15%"});
 })
 
 btMute.addEventListener("click", () => {
@@ -77,6 +105,18 @@ btMute.addEventListener("click", () => {
         btMute.previousElementSibling.innerText = "Mutar";
         alarmMuted = false;
     }
+})
+
+btSetTimes.addEventListener("click", () => {
+    modalSetTimes.showModal();
+    modalSetTimes.style.opacity = "1";
+});
+
+btCloseSetTimes.addEventListener("click", () => {
+    modalSetTimes.style.opacity = "0";
+    setTimeout(() => {
+        modalSetTimes.close();
+    }, 90);
 })
 
 btDefinition.addEventListener("click", () => {
@@ -110,9 +150,44 @@ document.addEventListener("keydown", function(event) {
         modalDefinition.style.opacity = "0";
         modalRestover.style.opacity = "0";
         modalFocusover.style.opacity = "0";
+        modalSetTimes.style.opacity = "0";
     }
-  });
+});
 
+
+btDecreaseFocus.addEventListener("click", () => {
+      setMinFocus.value = Number(setMinFocus.value) - 1
+})
+  
+btAddFocus.addEventListener("click", () => {
+      setMinFocus.value = Number(setMinFocus.value) + 1
+})
+  
+btDecreaseRest.addEventListener("click", () => {
+      setMinRest.value = Number(setMinRest.value) - 1
+})
+  
+btAddRest.addEventListener("click", () => {
+      setMinRest.value = Number(setMinRest.value) + 1
+})
+
+
+frm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    minFocus = Number(setMinFocus.value);
+    minRest = Number(setMinRest.value);
+    minTotal = minFocus;
+    console.log(minFocus);
+    console.log(minRest);
+
+    modalSetTimes.style.opacity = "0";
+    setTimeout(() => {
+        modalSetTimes.close();
+    }, 90);
+
+    remainingMinutes.innerText = minFocus + "m";
+    progressTime.children[1].innerText = `${minTotal}:00`;
+})
 
 
 function countTime() {
@@ -185,28 +260,28 @@ function switchMode() {
 
     if(isFocusMode){
         modeTitle.innerText = "Descanso";
-        remainingMinutes.innerText = "5m";
+        remainingMinutes.innerText = minRest + "m";
         remainingSeconds.innerText = "00s";
         isFocusMode = false;
         progressTime.children[0].innerText = "0:00";
-        progressTime.children[1].innerText = "5:00";
+        progressTime.children[1].innerText = `${minRest}:00`;
 
         imgRest.classList.remove("img-oculta");
         imgFocus.classList.add("img-oculta");
 
-        minTotal = 5;
+        minTotal = minRest;
     } else{
         modeTitle.innerText = "Foco";
-        remainingMinutes.innerText = "25m";
+        remainingMinutes.innerText = minFocus + "m";
         remainingSeconds.innerText = "00s";
         isFocusMode = true;
         progressTime.children[0].innerText = "0:00";
-        progressTime.children[1].innerText = "25:00";
+        progressTime.children[1].innerText = `${minFocus}:00`;
 
         imgFocus.classList.remove("img-oculta");
         imgRest.classList.add("img-oculta");
         
-        minTotal = 25;
+        minTotal = minFocus;
     }
 
     iconPlayPause.className = "bi bi-play-fill";
