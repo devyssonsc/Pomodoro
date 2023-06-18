@@ -1,3 +1,5 @@
+const worker = new Worker('js/worker.js');
+
 const btMute = document.querySelector("#mute");
 const modeTitle = document.querySelector("#mode-title");
 const imgFocus = document.querySelector("#img-focus");
@@ -31,10 +33,6 @@ const setMinRest = document.querySelector("#setMinRest");
 
 const frm = document.querySelector("form");
 
-
-
-let startClock;
-
 let alarmMuted = false;
 
 let isFocusMode = modeTitle.innerText.toLowerCase() == "foco" ? true : false;
@@ -51,15 +49,54 @@ let progressWidth = 0;
 
 const iconPlayPause = btPlayPause.children[0];
 
+let minutes = Number(remainingMinutes.innerText.slice(0, -1));
+let seconds = Number(remainingSeconds.innerText.slice(0, -1));
+
+let data = {minutes: minutes, seconds: seconds, clicked: "play"};
+
 btPlayPause.addEventListener("click", () => {
+    minutes = Number(remainingMinutes.innerText.slice(0, -1));
+    seconds = Number(remainingSeconds.innerText.slice(0, -1));
+
+    data = {postMin: minutes, postSec: seconds, clicked: "play"};
+
     if(iconPlayPause.className.includes("play")){
-        startClock = setInterval(countTime, 50);
+        data.clicked = "play";
+        worker.postMessage(data);
+        worker.onmessage = function(event){
+            postMin = event.data.postMin;
+            postSec = event.data.postSec;
+
+            if(postMin <= 0 && postSec <= 0){
+                data.clicked = "pause";
+                console.log(data);
+                worker.postMessage(data);
+                if(isFocusMode){
+                    modalFocusover.showModal();
+                    modalFocusover.style.opacity = "1";
+                } else{
+                    modalRestover.showModal();
+                    modalRestover.style.opacity = "1";
+                }
+        
+                if(!alarmMuted){
+                    alarm.currentTime = 2;
+                    alarm.play();
+                }
+                switchMode();
+                return;
+            }
+            
+            countTime(postMin, postSec);
+        }
+
         iconPlayPause.className = "bi bi-pause-fill";
         iconPlayPause.style.left = "7%";
         btPlayPause.addEventListener("mouseover", () => {btPlayPause.children[0].style.left = "7%"});
         btPlayPause.addEventListener("mouseout", () => {btPlayPause.children[0].style.left = "10%"});
     } else if(iconPlayPause.className.includes("pause")){
-        clearInterval(startClock)
+        data.clicked = "pause";
+        worker.postMessage(data);
         iconPlayPause.className = "bi bi-play-fill";
         iconPlayPause.style.left = "15%";
         btPlayPause.addEventListener("mouseover", () => {btPlayPause.children[0].style.left = "10%"});
@@ -68,11 +105,14 @@ btPlayPause.addEventListener("click", () => {
 })
 
 btSwitchMode.addEventListener("click", () => {
+    data.clicked = "pause";
+    worker.postMessage(data);
     switchMode();
 })
 
 btReset.addEventListener("click", () => {
-    clearInterval(startClock);
+    data.clicked = "pause";
+    worker.postMessage(data);
     btMute.children[0].className = "bi bi-bell";
     btMute.previousElementSibling.innerText = "Mute";
     alarmMuted = false;
@@ -190,34 +230,7 @@ frm.addEventListener("submit", (e) => {
 })
 
 
-function countTime() {
-    let minutes = Number(remainingMinutes.innerText.slice(0, -1));
-    let seconds = Number(remainingSeconds.innerText.slice(0, -1));
-    
-    if(minutes <= 0 && seconds <= 0){
-        if(isFocusMode){
-            modalFocusover.showModal();
-            modalFocusover.style.opacity = "1";
-        } else{
-            modalRestover.showModal();
-            modalRestover.style.opacity = "1";
-        }
-
-        if(!alarmMuted){
-            alarm.currentTime = 2;
-            alarm.play();
-        }
-        switchMode();
-        return;
-    }
-
-    if(seconds > 0){
-        seconds--; 
-    } else if(seconds <= 0){
-        seconds = 59
-        minutes--
-    }
-
+function countTime(minutes, seconds) {
     if(seconds < 10){
         remainingSeconds.innerText = "0" + seconds + "s";
     } else{
@@ -254,7 +267,8 @@ function progressBar() {
 }
 
 function switchMode() {
-    clearInterval(startClock);
+    data.clicked = "pause";
+    worker.postMessage(data);
     progressWidth = 0;
     progress.style.width = "0%";
 
