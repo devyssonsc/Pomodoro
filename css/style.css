@@ -390,3 +390,27 @@ dialog button{
     border-radius: 5px;
     text-align: center;
 }
+
+@media (max-width: 500px){
+    body{
+        height: 100vh;
+    }
+    .container-header{
+        padding: 20px;
+    }
+    .container{
+        margin: 50px auto;
+    }
+    .none{
+        display: none;
+    }
+    .container-header .logo{
+        width: 50%;
+    }
+    .option-buttons{
+        width: 50%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+}
