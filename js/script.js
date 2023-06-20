@@ -31,7 +31,7 @@ const btAddRest = document.querySelector("#btAddRest");
 const setMinFocus = document.querySelector("#setMinFocus");
 const setMinRest = document.querySelector("#setMinRest");
 
-const frm = document.querySelector("form");
+const btSubmit = document.querySelector("#submit");
 
 let alarmMuted = false;
 
@@ -152,7 +152,8 @@ btSetTimes.addEventListener("click", () => {
     modalSetTimes.style.opacity = "1";
 });
 
-btCloseSetTimes.addEventListener("click", () => {
+btCloseSetTimes.addEventListener("click", (e) => {
+    e.preventDefault();
     modalSetTimes.style.opacity = "0";
     setTimeout(() => {
         modalSetTimes.close();
@@ -212,7 +213,9 @@ btAddRest.addEventListener("click", () => {
 })
 
 
-frm.addEventListener("submit", (e) => {
+btSubmit.addEventListener("click", (e) => {
+    e.preventDefault();
+    console.log("submit");
     e.preventDefault();
     minFocus = Number(setMinFocus.value);
     minRest = Number(setMinRest.value);
@@ -303,3 +306,7 @@ function switchMode() {
     btPlayPause.addEventListener("mouseover", () => {btPlayPause.children[0].style.left = "10%"});
     btPlayPause.addEventListener("mouseout", () => {btPlayPause.children[0].style.left = "15%"});
 }
+
+window.addEventListener("load", () => {
+    alert("load");
+})
