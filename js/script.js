@@ -55,10 +55,10 @@ let seconds = Number(remainingSeconds.innerText.slice(0, -1));
 let data = {minutes: minutes, seconds: seconds, clicked: "play"};
 
 btPlayPause.addEventListener("click", () => {
-    minutes = Number(remainingMinutes.innerText.slice(0, -1));
-    seconds = Number(remainingSeconds.innerText.slice(0, -1));
+    min = Number(remainingMinutes.innerText.slice(0, -1));
+    sec = Number(remainingSeconds.innerText.slice(0, -1));
 
-    data = {postMin: minutes, postSec: seconds, clicked: "play"};
+    data = {postMin: min, postSec: sec, clicked: "play"};
 
     if(iconPlayPause.className.includes("play")){
         data.clicked = "play";
@@ -121,12 +121,9 @@ btReset.addEventListener("click", () => {
     remainingSeconds.innerText = "00s";
     isFocusMode = true;
     progressTime.children[0].innerText = "0:00";
-    progressTime.children[1].innerText = "25:00";
+    progressTime.children[1].innerText = minTotal + ":00";
     imgFocus.classList.remove("img-oculta");
     imgRest.classList.add("img-oculta");
-    minFocus = 25;
-    minRest = 5;
-    minTotal = minFocus;
     progressWidth = 0;
     progress.style.width = "0%";
     iconPlayPause.className = "bi bi-play-fill";
@@ -215,13 +212,12 @@ btAddRest.addEventListener("click", () => {
 
 btSubmit.addEventListener("click", (e) => {
     e.preventDefault();
-    console.log("submit");
-    e.preventDefault();
     minFocus = Number(setMinFocus.value);
-    minRest = Number(setMinRest.value);
-    minTotal = minFocus;
     console.log(minFocus);
+    minRest = Number(setMinRest.value);
     console.log(minRest);
+    minTotal = minFocus;
+    console.log(minTotal);
 
     modalSetTimes.style.opacity = "0";
     setTimeout(() => {
@@ -229,7 +225,9 @@ btSubmit.addEventListener("click", (e) => {
     }, 90);
 
     remainingMinutes.innerText = minFocus + "m";
-    progressTime.children[1].innerText = `${minTotal}:00`;
+    progressTime.children[1].innerText = minTotal + ":00";
+
+    btReset.dispatchEvent(new Event("click"));
 })
 
 
@@ -306,7 +304,3 @@ function switchMode() {
     btPlayPause.addEventListener("mouseover", () => {btPlayPause.children[0].style.left = "10%"});
     btPlayPause.addEventListener("mouseout", () => {btPlayPause.children[0].style.left = "15%"});
 }
-
-window.addEventListener("load", () => {
-    alert("load");
-})
