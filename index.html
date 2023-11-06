@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro DSC</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="shortcut icon" href="img/Icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header class="container-header">
+        <div class="none"></div>
+        <div class="logo">
+            <a href="index.html">
+                <img src="img/Icon.png" alt="Logo Tomate">
+                <h1>Pomodoro</h1>
+            </a>
+        </div>
+        <div class="option-buttons">
+            <button id="set-times-button">
+                <i class="bi bi-gear-fill"></i>
+                <img src="img/set-times.png" alt="Set Times" id="set-times">
+            </button>
+            <dialog id="modal-set-times">
+                <h2>Configurações</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="setMinFocus">Minutos de Foco:</label>
+                        <div class="input-group">
+                            <button type="button" id="btDecreaseFocus">-</button>
+                            <input type="number" id="setMinFocus" name="setMinFocus" min="1" max="60" readonly>
+                            <button type="button" id="btAddFocus">+</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="setMinRest">Minutos de Descanso:</label>
+                        <div class="input-group">
+                            <button type="button" id="btDecreaseRest">-</button>
+                            <input type="number" id="setMinRest" name="setMinRest" min="1" max="60" readonly>
+                            <button type="button" id="btAddRest">+</button>
+                        </div>
+                    </div>
+                    <button id="submit">Alterar</button>
+                    <button id="close-set-times">Cancelar</button>
+                </form>
+            </dialog>
+
+            <button id="definition-button">
+                <i class="bi bi-question-lg"></i>
+                <img src="img/definition.png" alt="What Is Pomodoro?" id="definition">
+            </button>
+            <dialog id="modal-definition">
+                <h2>O que é Pomodoro?</h2>
+                <p>
+                    A Técnica Pomodoro é um método de gerenciamento de tempo desenvolvido por
+                    Francesco Cirillo no final dos anos 80. Ela envolve a divisão do trabalho
+                    em intervalos, geralmente com duração de 25 minutos, chamados "pomodoros",
+                    separados por pequenas pausas. A técnica tem como objetivo melhorar o foco,
+                    produtividade e agilidade mental ao trabalhar em rajadas curtas e
+                    permitir pausas regulares. O nome "Pomodoro" vem da palavra italiana
+                    para tomate, pois Cirillo usava um cronômetro em forma de tomate na
+                    cozinha como um temporizador pessoal para acompanhar seus intervalos
+                    de trabalho. A Técnica Pomodoro ganhou popularidade como uma maneira
+                    simples e eficaz de aumentar a produtividade e gerenciar o tempo de
+                    forma eficiente.
+                </p>
+                <button id="close-definition">Fechar</button>
+            </dialog>
+
+        </div>
+    </header>
+    <main class="container-main">
+        <div class="container">
+
+            <dialog id="modal-focusover">
+                <h1>Hora do Descanso!</h1>
+                <p>
+                    Parabéns, você brilhou como uma supernova de produtividade!
+                    Agora é hora de relaxar, recarregar as energias e desfrutar de uma
+                    pausa merecida. Solte o trabalho, abrace a descontração e deixe seu
+                    cérebro desabrochar como uma margarida em um dia ensolarado. É o momento
+                    perfeito para se refrescar, recarregar e voltar com tudo na próxima sessão de foco!
+                </p>
+                <button id="close-focusover">Ufa!</button>
+            </dialog>
+
+            <dialog id="modal-restover">
+                <h1>Chega né?</h1>
+                <p>
+                    A diversão chegou ao fim e é hora de retomar o foco! Deixe de lado as
+                    distrações e concentre-se nas suas metas e objetivos. É o momento de
+                    colocar em prática todo o seu empenho e determinação. Não perca tempo,
+                    ois o sucesso espera por você. Volte com tudo e mostre ao mundo do que
+                    você é capaz!
+                </p>
+                <button id="close-restover">Vamo lá!</button>
+            </dialog>
+
+            <div class="div-mute">
+                <audio src="audio/alarm.mp3"></audio>
+                <span id="mute-hover">Mutar</span>
+                <span id="mute"><i class="bi bi-bell"></i></span>
+            </div>
+
+            <h2 id="mode-title">Foco</h2>
+            <img src="img/img-focus.png" alt="Focus" id="img-focus">
+            <img src="img/img-rest.png" alt="Rest" id="img-rest" class="img-oculta">
+            <span id="remaining-time">
+                <p id="minutes">25m</p>
+                <p id="seconds">00s</p>
+            </span>
+
+            <div class="progress-bar">
+                <div class="progress"></div>
+                <div class="progress-time">
+                    <p>0:00</p>
+                    <p>25:00</p>
+                </div>
+            </div>
+
+
+            <div class="controls">
+
+                <div class="div-switch">
+                    <span id="switch-mode"><i class="bi bi-arrow-left-right"></i></span>
+                    <span id="switch-mode-hover">Trocar</span>
+                </div>
+
+                <div id="play-pause"><i class="bi bi-play-fill"></i></div>
+
+                <div class="div-reset">
+                    <span id="reset"><i class="bi bi-arrow-counterclockwise"></i></span>
+                    <span id="reset-hover">Reiniciar</span>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
