@@ -14,7 +14,7 @@ self.onmessage = function(event){
             postMin--
         }
         self.postMessage({postMin, postSec});
-        }, 10);
+        }, 1000);
     }else if(data.clicked == "pause"){
         clearInterval(startClock);
     }
